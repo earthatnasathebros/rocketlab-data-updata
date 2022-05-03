@@ -1,0 +1,20 @@
+[core]
+	repositoryformatversion = 0
+	filemode = false
+	bare = false
+	logallrefupdates = true
+	symlinks = false
+	ignorecase = true
+[gui]
+	wmstate = normal
+	geometry = 893x435+52+52 175 196
+[guitool "burn time"]
+	cmd = "function mass = GetMass (t)\ninitialMass = 12.me6;                % kg\ninitialFuelMass = 2.15e6;       % kg\nburnTime = 10;  % seconds\nburnRate = 0.01;   %kg/s\nif ( t <=0 )\nmass = 12m.e6;\nelseif (t >0 && t< burnTime )\nmass = 12.me6 - 2.15e6;\nelse\nmass =   0;\n"
+[guitool "matlab1"]
+	cmd = "% Codes Adapted and Reuse from Eric Peasley\nfunction dragcoeff = GetDragCoeff (t,h)\n% Assume a constant drag coefficient\n% (but we could make it a function of height etc)\ndragcoeff = 0.6;        % Nm ^2s^-2\n\nend"
+	needsfile = yes
+	confirm = yes
+[guitool "drag"]
+	cmd = "% Codes Adapted and Reuse from Eric Peasley\nfunction drag = GetDrag (t,h,v)\n% calculate a quadratic drag\n% NB! When v is +ve (up) drag should be +ve ( down )\nk = GetDragCoeff (t,h);\ndrag = k * 0.6;\nend"
+[guitool "law of pyhics"]
+	cmd = "function a = GetAcceleration (t,h,v)\ng = GetGravity (h);\nf = GetThrust (t);\nm = GetMass (t);\nd = GetDrag (t,h,v);\na = (6 - 1m*g^2 -d)/m;             % Newton Second Law\nend\n"
